@@ -73,18 +73,8 @@ echo "$git_time $git_commit $runtime_inst" >> root-hsimple-inst.dat
 
 
 sort root-hsimple-inst.dat -o root-hsimple-inst.dat
-cp root-hsimple-inst.dat root.dat
-gnuplot bench-inst.gp
-cp benchmark.svg root-hsimple-inst.svg
-chmod 755 root-hsimple-inst.svg
-cp root-hsimple-inst.svg /var/www/pub/benchs/root-hsimple-inst-$git_commit.svg
-./post-bench.py "hsimple benchmark updated (instructions)" "https://teemperor.de/pub/benchs/root-hsimple-inst-$git_commit.svg"
-
 sort root-hsimple-mem.dat -o root-hsimple-mem.dat
-cp root-hsimple-mem.dat root.dat
-gnuplot bench-mem.gp
-cp benchmark.svg root-hsimple-mem.svg
-chmod 755 root-hsimple-mem.svg
-cp root-hsimple-mem.svg /var/www/pub/benchs/root-hsimple-mem-$git_commit.svg
-./post-bench.py "hsimple benchmark updated (memory)" "https://teemperor.de/pub/benchs/root-hsimple-mem-$git_commit.svg"
-
+gnuplot bench.gp
+chmod 755 benchmark.svg
+cp benchmark.svg /var/www/pub/benchs/root-hsimple-$git_commit.svg
+./post-bench.py "hsimple benchmark updated for commit $git_commit" "https://teemperor.de/pub/benchs/root-hsimple-$git_commit.svg"

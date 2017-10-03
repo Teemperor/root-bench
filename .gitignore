@@ -13,7 +13,6 @@ runtime_*
 .local/
 .root_hist
 .screenrc
-bench.gp
 ccache.conf
 make_run_many.sh
 mattermost-hook
