@@ -1,4 +1,4 @@
-set terminal svg size 1000,400  enhanced background rgb 'white'
+set terminal svg size 1200,400  enhanced background rgb 'white'
 set output 'benchmark.svg'
 
 set multiplot layout 1,2 rowsfirst
