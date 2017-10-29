@@ -68,7 +68,7 @@ make_profile() {
   rm -f runtime_instructions.all
 
   echo "Profiling used instructions of $1..."
-  for run in {1..6}
+  for run in `seq $2`;
   do
     echo "Iteration $run"
     bash -c "cd $DIR/build/tutorials && LD_LIBRARY_PATH=$DIR/build/lib:/usr/lib:/usr/lib ROOTIGNOREPREFIX=1 perf stat -e instructions:u $DIR/build/bin/root.exe -l -q -b -n -x $1 -e return"  2>perf_out 1>/dev/null
@@ -81,7 +81,7 @@ make_profile() {
   # Record memory of hsimple
   rm -f runtime_mem.all
   # Valgrind might return non-zero on a leak, so disable the early exit
-  for run in {1..6}
+  for run in `seq $2`;
   do
     echo "Iteration $run"
     set +e
@@ -105,6 +105,8 @@ make_profile() {
   ./post-bench.py "$1 benchmark updated for commit $git_commit (extra compiler flags: $EXTRA_CC_FLAGS )" "$output_url/root-$safe_name.$git_commit.svg"
 }
 
-make_profile hsimple.C
-make_profile tmva/TMVAClassification.C
-make_profile dataframe/tdf101_h1Analysis.C
+
+
+./list_benchmarks.py | while read -r line ; do
+    make_profile $line
+done

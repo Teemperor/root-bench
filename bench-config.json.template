@@ -5,5 +5,10 @@
   "mattermost-hook" : "The mattermost hook to use when posting the result to mattermost.",
   "bot-avatar" : "URL to use as the mattermost bot avatar. E.g. 'https://google.de/logo.png'",
   "mattermost-channel" : "The mattermost channel to post the notification in.",
-  "bot-name" : "The name the mattermost bot should use."
+  "bot-name" : "The name the mattermost bot should use.",
+  "benchmarks" : [
+    ["hsimple.C", 20],
+    ["tmva/TMVAClassification.C", 5],
+    ["dataframe/tdf101_h1Analysis.C", 10]
+  ]
 }
