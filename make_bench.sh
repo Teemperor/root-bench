@@ -29,8 +29,16 @@ git_day=`echo $git_time | awk '{print $1}'`
 echo "Taking benchmark at time $git_time with day $git_day"
 
 ###################################################################
+# Parse config
+
+output_dir=`./get_config.py output-dir $DIR/build`
+echo "Output directory for SVG files is '$output_dir'"
+output_url=`./get_config.py output-url`
+echo "Output public URL for SVG files is '$output_url'"
+
+###################################################################
 # Update root
-[[ -d dir ]] && git clone https://github.com/root-project/root.git
+[[ -d root ]] || git clone https://github.com/root-project/root.git
 cd root
 git reset --hard
 git clean -fd
@@ -93,8 +101,8 @@ make_profile() {
   ./setup_bench.py current_bench.gp "$1"
   gnuplot current_bench.gp
   chmod 755 benchmark.svg
-  cp benchmark.svg /var/www/root-bench/root-$safe_name.$git_commit.svg
-  ./post-bench.py "$1 benchmark updated for commit $git_commit (extra compiler flags: $EXTRA_CC_FLAGS )" "https://teemperor.de/root-bench/root-$safe_name.$git_commit.svg"
+  cp benchmark.svg "$output_dir/root-$safe_name.$git_commit.svg"
+  ./post-bench.py "$1 benchmark updated for commit $git_commit (extra compiler flags: $EXTRA_CC_FLAGS )" "$output_url/root-$safe_name.$git_commit.svg"
 }
 
 make_profile hsimple.C

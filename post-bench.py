@@ -3,6 +3,9 @@ import json
 import urllib.request
 import sys
 
+with open('bench-config.json') as data_file:
+    config = json.load(data_file)
+
 def sendMessage(icon, channel, userId, image, message, url):
     color = ""
     payload = {"icon_url": icon,
@@ -26,13 +29,10 @@ def sendMessage(icon, channel, userId, image, message, url):
     responseContent = response.read()
     print("Mattermost responded with status code {}: {}".format(response.getcode(), responseContent))
 
-with open('mattermost-hook', 'r') as myfile:
-    url=myfile.read().strip()
-
-icon = "https://rigor.com/wp-content/uploads/2016/03/how-fast-is-too-fast.png"
-channel = "performance"
-#channel = "testing"
-userId = "Raphael's benchmark bot"
+url = config["mattermost-hook"]
+icon = config["bot-avatar"]
+channel = config["mattermost-channel"]
+userId = config["bot-name"]
 message = sys.argv[1]
 image = sys.argv[2]
 

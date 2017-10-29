@@ -20,3 +20,4 @@ root-hsimple-inst.dat.bak
 run_many.sh
 current_bench.gp
 make_bench_fast.sh
+bench-config.json
