@@ -31,6 +31,7 @@ with open('mattermost-hook', 'r') as myfile:
 
 icon = "https://rigor.com/wp-content/uploads/2016/03/how-fast-is-too-fast.png"
 channel = "performance"
+#channel = "testing"
 userId = "Raphael's benchmark bot"
 message = sys.argv[1]
 image = sys.argv[2]
