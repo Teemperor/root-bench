@@ -35,6 +35,9 @@ output_dir=`./get_config.py output-dir $DIR/build`
 echo "Output directory for SVG files is '$output_dir'"
 output_url=`./get_config.py output-url`
 echo "Output public URL for SVG files is '$output_url'"
+html_report="$output_dir/benchmarks.html"
+echo "Outputting HTML to $html_report"
+html_report_tmp="$DIR/report_tmp.html"
 
 ###################################################################
 # Update root
@@ -80,13 +83,10 @@ make_profile() {
   echo "Profiling memory of $1..."
   # Record memory of hsimple
   rm -f runtime_mem.all
-  # Valgrind might return non-zero on a leak, so disable the early exit
   for run in `seq $2`;
   do
     echo "Iteration $run"
-    set +e
     bash -c "cd $DIR/build/tutorials && LD_LIBRARY_PATH=$DIR/build/lib:/usr/lib:/usr/lib ROOTIGNOREPREFIX=1 /usr/bin/time -v -o $DIR/build/runtime_mem_tmp  $DIR/build/bin/root.exe -l -q -b -n -x hsimple.C -e return " 1>/dev/null  2>perf_out
-    set -e
     cat "$DIR/build/runtime_mem_tmp" | grep "Maximum resident set size" | awk '{print $6}' >> runtime_mem.all
   done
   ./make_average.py runtime_mem.all runtime_mem
@@ -102,11 +102,16 @@ make_profile() {
   gnuplot current_bench.gp
   chmod 755 benchmark.svg
   cp benchmark.svg "$output_dir/root-$safe_name.$git_commit.svg"
-  ./post-bench.py "$1 benchmark updated for commit $git_commit (extra compiler flags: $EXTRA_CC_FLAGS )" "$output_url/root-$safe_name.$git_commit.svg"
+  ./post-bench.py "$1 benchmark updated for commit $git_commit" "$output_url/root-$safe_name.$git_commit.svg"
+  echo "<img class='benchmark' src='${output_url}/root-${safe_name}.${git_commit}.svg' height='100%'>" >> "$html_report_tmp"
 }
 
-
+cp "$DIR/prefix.html" "$html_report_tmp"
 
 ./list_benchmarks.py | while read -r line ; do
     make_profile $line
 done
+
+cat "$DIR/suffix.html" >> "$html_report_tmp"
+echo "Publishing HTML report"
+cp "$html_report_tmp" "$html_report"
