@@ -29,6 +29,9 @@ def sendMessage(icon, channel, userId, image, message, url):
     responseContent = response.read()
     print("Mattermost responded with status code {}: {}".format(response.getcode(), responseContent))
 
+if not "mattermost-hook" in config:
+  print("No hook supplied, assuming silent mode")
+  exit(0)
 url = config["mattermost-hook"]
 icon = config["bot-avatar"]
 channel = config["mattermost-channel"]

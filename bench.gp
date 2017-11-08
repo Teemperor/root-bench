@@ -11,7 +11,7 @@ set xlabel "Date\n"
 set timefmt '%Y-%m-%d'
 set yrange [ 0 : ]
 set xdata time
-set xrange [time(0) - 75*24*60*60:]
+set xrange [time(0) - 79*24*60*60:]
 set xtics rotate by 45 offset -3, -3
 #set autoscale x
 #set xrange [ "2017-9-5":"2018-9-5" ]
@@ -29,7 +29,7 @@ set xlabel "Date\n"
 set timefmt '%Y-%m-%d'
 set yrange [ 0 : ]
 set xdata time
-set xrange [time(0) - 75*24*60*60:]
+set xrange [time(0) - 79*24*60*60:]
 set xtics rotate by 45 offset -3, -3
 #set autoscale x
 #set xrange [ "2017-9-5":"2018-9-5" ]
