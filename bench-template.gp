@@ -4,6 +4,8 @@ set output 'benchmark.svg'
 set multiplot layout 2,1 rowsfirst
 
 set style line 1 lc rgb '#0060ad' lt 1 lw 2 pt 7 pi -1 ps 0.5
+set style line 2 lc rgb '#6000ad' lt 1 lw 2 pt 7 pi -1 ps 0.5
+set style line 3 lc rgb '#ad6000' lt 1 lw 2 pt 7 pi -1 ps 0.5
 
 set title "Instructions of TUTORIAL_NAME"
 set style data fsteps
@@ -19,9 +21,7 @@ set ylabel "Instructions"
 set format x "%Y-%m-%d"
 set grid
 set key left
-plot 'inst.dat' using 1:4 t '' with linespoints ls 1
-
-set style line 1 lc rgb '#6000ad' lt 1 lw 2 pt 7 pi -1 ps 0.5
+PLOT-INST
 
 set title "Memory of TUTORIAL_NAME"
 set style data fsteps
@@ -37,4 +37,4 @@ set ylabel "Memory in kB"
 set format x "%Y-%m-%d"
 set grid
 set key left
-plot 'mem.dat' using 1:4 t '' with linespoints ls 1
+PLOT-MEM

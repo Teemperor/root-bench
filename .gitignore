@@ -23,3 +23,6 @@ make_bench_fast.sh
 bench-config.json
 report_tmp.html
 .tmux.conf
+build_*
+build-*
+bench.gp
