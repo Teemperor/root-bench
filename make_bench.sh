@@ -35,7 +35,7 @@ output_dir=`./get_config.py output-dir $DIR/build`
 echo "Output directory for SVG files is '$output_dir'"
 output_url=`./get_config.py output-url`
 echo "Output public URL for SVG files is '$output_url'"
-html_report="$output_dir/benchmarks-new.html"
+html_report="$output_dir/benchmarks.html"
 echo "Outputting HTML to $html_report"
 html_report_tmp="$DIR/report_tmp.html"
 
