@@ -93,15 +93,15 @@ do
   echo "  Flags: $build_flags"
   echo "  Build dir: $build_dir"
 
-#  rm -rf "$build_dir"
-#  mkdir "$build_dir"
-#  cd "$build_dir"
+  rm -rf "$build_dir"
+  mkdir "$build_dir"
+  cd "$build_dir"
 
-#  cmake -DCMAKE_C_FLAGS="-march=native -Wno-gnu-statement-expression" \
-#        -DCMAKE_CXX_FLAGS="-march=native " \
-#        -Dall=On -Dbuiltin_lz4=On -DCMAKE_BUILD_TYPE=Optimized $build_flags -GNinja ../root
+  cmake -DCMAKE_C_FLAGS="-march=native -Wno-gnu-statement-expression" \
+        -DCMAKE_CXX_FLAGS="-march=native " \
+        -Dall=On -Dbuiltin_lz4=On -DCMAKE_BUILD_TYPE=Optimized $build_flags -GNinja ../root
 
-#  ionice -t -c 3 nice -n 19 ninja -j3
+  ionice -t -c 3 nice -n 19 ninja -j3
 done
 
 cd "$DIR"
