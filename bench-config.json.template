@@ -10,5 +10,9 @@
     ["hsimple.C", 20],
     ["tmva/TMVAClassification.C", 5],
     ["dataframe/tdf101_h1Analysis.C", 10]
+  ],
+  "build-configs" : [
+    ["Release", "normal", ""],
+    ["C++ modules", "modules", "-Druntime_cxxmodules=On"]
   ]
 }
