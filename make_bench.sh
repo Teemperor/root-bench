@@ -45,6 +45,8 @@ html_report_tmp="$DIR/report_tmp.html"
 mapfile -t build_names < "$DIR/build_names"
 mapfile -t build_ids < "$DIR/build_ids"
 mapfile -t build_flags_list < "$DIR/build_flags"
+mapfile -t build_cflags_list < "$DIR/build_cflags"
+mapfile -t build_cxxflags_list < "$DIR/build_cxxflags"
 declare -a build_dirs
 build_configs="${#build_names[@]}"
 
@@ -86,20 +88,24 @@ do
   build_name="${build_names[$i]}"
   build_id="${build_ids[$i]}"
   build_flags="${build_flags_list[$i]}"
+  build_cflags="${build_cflags_list[$i]}"
+  build_cxxflags="${build_cxxflags_list[$i]}"
   build_dir="${build_dirs[$i]}"
 
   echo "  Name: $build_name"
   echo "  ID: $build_id"
   echo "  Flags: $build_flags"
+  echo "  C flags: $build_cflags"
+  echo "  C++ flags: $build_cxxflags"
   echo "  Build dir: $build_dir"
 
   rm -rf "$build_dir"
   mkdir "$build_dir"
   cd "$build_dir"
 
-  cmake -DCMAKE_C_FLAGS="-march=native -Wno-gnu-statement-expression" \
-        -DCMAKE_CXX_FLAGS="-march=native " \
-        -Dall=On -Dbuiltin_lz4=On -DCMAKE_BUILD_TYPE=Optimized $build_flags -GNinja ../root
+  export CFLAGS="$build_cflags"
+  export CXXFLAGS="$build_cxxflags"
+  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=On -Dall=On -Dbuiltin_lz4=On -DCMAKE_BUILD_TYPE=Optimized $build_flags -GNinja ../root
 
   ionice -t -c 3 nice -n 19 ninja -j3
 done

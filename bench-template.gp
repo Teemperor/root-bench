@@ -20,7 +20,7 @@ set xtics rotate by 45 offset -3, -3
 set ylabel "Instructions"
 set format x "%Y-%m-%d"
 set grid
-set key left
+set key left bottom
 PLOT-INST
 
 set title "Memory of TUTORIAL_NAME"
@@ -36,5 +36,5 @@ set xtics rotate by 45 offset -3, -3
 set ylabel "Memory in kB"
 set format x "%Y-%m-%d"
 set grid
-set key left
+set key left bottom
 PLOT-MEM

@@ -15,3 +15,9 @@ with open("build_ids", "w") as f:
 with open("build_flags", "w") as f:
    for config in data["build-configs"]:
        f.write(config[2] + "\n")
+with open("build_cflags", "w") as f:
+   for config in data["build-configs"]:
+       f.write(config[3] + "\n")
+with open("build_cxxflags", "w") as f:
+   for config in data["build-configs"]:
+       f.write(config[4] + "\n")
